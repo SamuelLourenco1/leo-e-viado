@@ -49,7 +49,8 @@ const listItems = async () => {
         const res = await fetch (`${BASE_URL}/items`, {
             method: `GET`,
             headers: {
-                "Content-Type":"application/json"
+                "Content-Type":"application/json",
+                connection: 'close'
             }
         })
         if(!res.ok){
@@ -92,6 +93,23 @@ const showItens = async (arrayItems) => {
     console.log(arrayItems)
 }
 /**Fim do cadastro do item */
+const deleteItem = async(objId) => {
+    try{
+        const res = await fetch(`${BASE_URL}/items/${objId}`,{
+            method: 'DELETE'
+        })
+        if(!res.ok){
+            console.log('erro ao excluir')
+            return
+        }
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+const editItem = (objId) => {
+    
+}
 
 //Eventos de interação
 formCadastro.addEventListener("submit", handleFormSubmit);
